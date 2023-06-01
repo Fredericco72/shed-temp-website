@@ -5,6 +5,7 @@ from flask import Flask, request
 from datetime import datetime
 
 app = Flask(__name__)
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 message = "Waiting for data"
 
