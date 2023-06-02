@@ -3,9 +3,12 @@
 
 from flask import Flask, request
 from datetime import datetime
+from tinydb import TinyDB
+from tinydb.storages import MemoryStorage
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+db = TinyDB(storage=MemoryStorage)
 
 message = "Waiting for data"
 
@@ -20,3 +23,8 @@ def set_temp():
     if "message" in req_json:
         message = str(datetime.now()) + " UTC<br>" + req_json["message"]
     return message, 200
+
+@app.route("/api", methods=["POST"])
+def store_data():
+    db.insert(request.get_json())
+    return "Thank you", 200
