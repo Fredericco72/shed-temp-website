@@ -4,11 +4,10 @@
 from flask import Flask, request, jsonify, render_template
 from datetime import datetime
 from tinydb import TinyDB
-from tinydb.storages import MemoryStorage
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-db = TinyDB(storage=MemoryStorage)
+db = TinyDB("db.json")
 
 message = "Waiting for data"
 
