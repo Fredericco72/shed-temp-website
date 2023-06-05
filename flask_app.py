@@ -1,7 +1,7 @@
 
 # A very simple Flask Hello World app for you to get started with...
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from datetime import datetime
 from tinydb import TinyDB
 from tinydb.storages import MemoryStorage
@@ -15,6 +15,10 @@ message = "Waiting for data"
 @app.route('/')
 def show_temp():
     return message
+
+@app.route("/chart")
+def chart():
+    return render_template("chart.html")
 
 @app.route("/data")
 def data():
