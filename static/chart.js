@@ -9,7 +9,7 @@ const y_scale = d3.scaleLinear().range([height, 0]);
 console.log("Hello");
 
 d3
-	.json("http://shedtemp.pythonanywhere.com/data")
+	.json("https://shedtemp.pythonanywhere.com/data")
 	.then((data) => {
 		console.log("world");
 		console.log(data);
