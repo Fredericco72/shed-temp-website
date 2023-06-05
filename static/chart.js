@@ -13,5 +13,20 @@ d3
 	.then((data) => {
 		console.log("world");
 		console.log(data);
+
+		// Scale the range of the data in the domains
+		x_scale.domain(d3.extent(data.data, d => d.datetime));
+		y_scale.domain([0, d3.max(data.data, d => d.avg_cpu_temp)]);
+
+		// append the rectangles for the bar chart
+		svg
+			.selectAll("rect")
+			.data(data.data)
+			.join("rect")
+			.attr("class", "bar")
+			.attr("x", (d) => x_scale(d.datetime))
+			.attr("y", (d) => y_scale(d.avg_cpu_temp))
+			.attr("width", x_scale.bandwidth())
+			.attr("height", (d) => height - y_scale(d.avg_cpu_temp));
 	})
 	.catch((d) => console.log(d));
